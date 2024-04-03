@@ -6,16 +6,16 @@
 
 # Reading input from STDIN 
 testcase = int(input())
-print(testcase)
+#print(testcase)
 for i in range (testcase):
     pwd_len =  int(input())
-    print(pwd_len)
+    #print(pwd_len)
     details = input()
     details=details.split()
     details = [int(num) for num in details]
-    print(details)
+    #print(details)
     password_org = input()
-    print(password_org)
+    #print(password_org)
     #pwd_len =  details[0]
     count_0 = password_org.count('0')
     #count_0_req = details[1]
@@ -32,21 +32,21 @@ for i in range (testcase):
         elif (password_list[i] == '1' and count_1_req >=1):
             count_1 = count_1 -1
             count_1_req = count_1_req -1
-        else :
-            if(count_0_req > 0 and count_0 == 0 ):
+        elif (count_0_req > 0 or count_1_req > 0 ):
+            if(count_0_req > count_0 ):
                 password_list[i] = '0'
                 replacement = replacement +1
                 count_0_req = count_0_req -1
-            elif(count_1_req > 0 and count_1 == 0 and count_1_req >= count_0 ):
+            elif(count_1_req > count_1  ):
                 password_list[i] = '1'
                 replacement = replacement +1
                 count_1_req = count_1_req -1
-            else:
-                
+        elif (count_0_req == 0 or count_1_req == 0):
+            if (password_list[i] == '0' or password_list[i] == '1'):
+                password_list[i] = '2'
+                replacement = replacement +1
+
 # Writing output to STDOUT
-    # print(replacement)
+    print(replacement)
     password_converted = ''.join(password_list)
-    # print(password_converted)
-
-
-         
+    print(password_converted)
